@@ -1,0 +1,170 @@
+<!DOCTYPE html><html><head><script>if(window.document.documentMode) window.location.replace("https://enloetime.com/ieunsup") </script>
+    
+        <!--link rel="stylesheet" href="classtime.css"-->
+        <link rel="icon" href="ico2.ico">
+        <title id="title">EnloeTime</title>
+        <meta property="description" value="EnloeTime is a web timer for how much time is left in the current Enloe class period.">
+        <meta property="og:title" value="Enloe Class Timer">
+        <meta property="og:description" value="A timer for how much time remains in the current period">
+        <style>
+:root {
+   --usr-clr: #90EF90/* #FF8800*/;
+   --usr-bg: #000000;
+   --msg-clr: lightblue /*#B250DD*/;
+}
+
+#chatdiv{
+    border-width: 2px;
+    border: solid 2px var(--usr-clr);
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+    width: 350px;
+    height: 200px;
+    float:left;
+}
+
+#msgs{
+    height: 175px;
+    overflow-x:wrap;
+    overflow-y:scroll;
+    background-color: var(--usr-bg);
+}
+.msgtime {
+    color: #DC143C;
+    font-family: monospace;
+    padding-bottom: 0;
+}
+.msgauthor {
+    color: var(--msg-clr);
+    
+    font-family: monospace;
+    padding-bottom: 0;
+}
+#nameinput{
+    outline: none;
+    color: var(--usr-clr);
+    position: absolute;
+    background-color: var(--usr-bg);
+    right: 0;
+    bottom: 0;
+    width: 250px;
+    font-family: monospace;
+    border-color:var(--usr-clr);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.msg {
+    font-family: monospace;
+    padding-bottom: 0;
+    word-wrap: break-word;
+}
+#chatinput{
+    height:25px;
+    width: 250px;
+    outline:none;
+    background-color: var(--usr-bg);
+    font-family: monospace;
+    color: var(--usr-clr);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border-color:var(--usr-clr);
+    position: absolute;
+    bottom:0;
+    left:0;
+}
+#chatsend{
+    background-color: var(--usr-bg);
+    color: var(--usr-clr);
+    font-style: monospace;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: solid 2px var(--usr-clr);
+    height:25px;
+    width: 100px;
+    position: absolute;
+    bottom:0;
+    right:0;
+    outline:none;
+}
+h1 {
+    font-size: 100px;
+    font-family: monospace;
+}
+#header {
+    color:var(--usr-clr);
+    text-align:center;
+}
+
+html {
+    color: var(--usr-clr);
+    background-color: var(--usr-bg);
+}
+et-set {
+    display: none;
+}
+        </style>
+    </head>
+    <body style="font-size: 30px">
+        <et-set hidden="">
+          <schedule-options></schedule-options>
+          <offset-secs>0</offset-secs>
+        </et-set>
+        <p id="banner" style="font-family: monospace; position: absolute; top: 10px; padding: 0; font-size: 80%; margin: 0; left: 25vw; width: 50vw; font-size: 2.8vw; text-align: center;">
+          <!--May 17th is a B day-->
+        </p>
+        <a style="top:0;right:0;position:absolute;color:var(--usr-clr);font-size:30px;font-family: monospace;" target="_blank" href="credits">
+          Credits
+        </a>
+	
+        <!--a href="actschedule" style="color: orange; font-family:monospace;top:2em;right:0;position:absolute;">
+           ACT Schedule
+        </a>
+        <a href="reloc" style="color: orange; font-family:monospace;top:3em;right:0;position:absolute;">
+           Student Destinations
+        </a-->
+        <a href="schedule" style="font-family:monospace;top:1.2em;right:0;position:absolute;color:var(--usr-clr);">
+           Schedule
+        </a>
+        <!--a href="wks" style="font-family:monospace;top:2em;right:0;position:absolute;color:orange">
+           WorkKeys Room Placements
+        </a-->
+        <p style="float: left;left: 0; bottom: 0;position: fixed; font-family: monospace;padding:0;margin:0; font-size: 5vmax;font-weight: bold;">
+          enloetime.com
+        </p>
+          
+        
+        
+        <div id="checkboxes" style="font-family: monospace;">
+            <input type="checkbox" id="bl" style="width: 20px; height: 20px;">
+            <label for="bl" style="font-size: 15px;vertical-align: 5px;">B-lunch</label>
+            <br>
+            <!--p hidden style="margin: 0; padding: 0;">Upcoming days with<br>different schedules:<br>
+            <br>11/23-11/25: No School</p>
+            <!--input type="checkbox" id="hr"-->
+            <!--label for="hr">Homeroom</label-->
+            <!--br-->
+            <!--input type="checkbox" checked hidden id="er">
+            <!--label for="er">Early Release</label-->
+        </div>
+        <!--label style="font-family:monospace;font-size:20px">
+          <input type="checkbox" id="flash" style="margin-right:20px;vertical-align:-5px;width:20px; height:20px;"><strong>Disable Christmas Flash</strong>
+        </label-->
+        <div id="main" style="padding: 10px 0 0 0; margin:0;">
+            <p id="txt" style="margin: 0; font-family: monospace; font-weight: bold; left:0; position: absolute; top: 25vh; font-size: 8vmax; width: 100vw; text-align: center;">Loading...</p>
+        </div>
+        <!--input id="nameinput" type="text" placeholder="Enter a chat username..."-->
+        <div id="chatdiv" hidden="">
+            <div id="msgs">
+                
+            </div>
+            <input type="text" id="chatinput" placeholder="Message all online...">
+            <input type="button" value="Send [Enter]" id="chatsend" style="float:left;">
+        </div>
+        <script src="classtime.js"></script>
+    
+
+</body></html>
